@@ -1,0 +1,16 @@
+# Spin Win static site — https://github.com/hilal41/spanwin
+[build]
+  publish = "."
+
+# Proxy API calls to HMS production (avoids mixed-content + CORS from Netlify HTTPS).
+[[redirects]]
+  from = "/api/*"
+  to = "http://54.167.151.96/api/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
