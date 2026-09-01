@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spin Win</title>
+    <meta name="description" content="Spin Win — spin for PKR and grow your wallet balance." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div id="confetti" class="confetti" aria-hidden="true"></div>
+
+    <!-- VIEW 1: Login -->
+    <section id="view-login" class="view view-login">
+      <div class="login-layout">
+        <div class="login-brand">
+          <div class="logo logo-lg">
+            <span class="logo-mark" aria-hidden="true">SW</span>
+            <span class="logo-text">
+              <span class="logo-spin">SPIN</span><span class="logo-win">WIN</span>
+            </span>
+          </div>
+          <h1 class="login-title">Spin. Win. Cash out.</h1>
+          <p class="login-lead">One wheel. Real PKR prizes. Your balance updates instantly after every spin.</p>
+
+          <div class="withdraw-methods">
+            <p class="withdraw-methods-label">Easy withdraw with</p>
+            <div class="withdraw-methods-row" aria-label="Withdraw methods">
+              <span class="pay-badge pay-easypaisa">
+                <span class="pay-dot" aria-hidden="true"></span>
+                EasyPaisa
+              </span>
+              <span class="pay-badge pay-jazzcash">
+                <span class="pay-dot" aria-hidden="true"></span>
+                JazzCash
+              </span>
+            </div>
+          </div>
+
+          <div class="login-glow" aria-hidden="true"></div>
+        </div>
+
+        <div class="login-panel">
+          <p class="eyebrow">Sign in</p>
+          <h2 class="login-panel-title">Open your wallet</h2>
+          <p class="login-panel-sub">Enter your details to start spinning.</p>
+
+          <form id="login-form" class="spin-form" novalidate>
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" required maxlength="150" placeholder="Your name" />
+              <span class="field-error" data-error-for="fullName"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="255" placeholder="you@email.com" />
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+            <div class="field">
+              <label for="phoneNumber">Phone</label>
+              <input id="phoneNumber" name="phoneNumber" type="tel" autocomplete="tel" required maxlength="20" placeholder="03XX XXXXXXX" />
+              <span class="field-error" data-error-for="phoneNumber"></span>
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="100" placeholder="Your password" />
+              <span class="field-error" data-error-for="password"></span>
+            </div>
+
+            <button type="submit" id="login-btn" class="spin-btn">
+              <span class="login-btn-label">Continue</span>
+            </button>
+            <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Wallet + spinner -->
+    <section id="view-spin" class="view view-spin" hidden>
+      <header class="wallet-top">
+        <div class="logo logo-sm">
+          <span class="logo-mark" aria-hidden="true">SW</span>
+          <span class="logo-text">
+            <span class="logo-spin">SPIN</span><span class="logo-win">WIN</span>
+          </span>
+        </div>
+        <div class="wallet-top-actions">
+          <span id="account-status" class="status-dot">Online</span>
+          <button type="button" id="logout-btn" class="ghost-btn">Log out</button>
+        </div>
+      </header>
+
+      <div class="app-shell">
+        <div class="wallet-layout">
+          <aside class="wallet-side">
+            <article class="balance-card" aria-live="polite">
+              <div class="balance-card-head">
+                <p class="balance-label">Available balance</p>
+                <span class="wallet-id" id="wallet-id">WALLET</span>
+              </div>
+              <p class="balance-value">
+                <span id="balance-amount">0</span>
+                <span class="balance-currency">PKR</span>
+              </p>
+              <p id="player-name" class="player-name"></p>
+
+              <div class="wallet-actions">
+                <button type="button" id="withdraw-btn" class="withdraw-btn">Withdraw</button>
+              </div>
+              <p id="withdraw-message" class="withdraw-message" role="status" aria-live="polite"></p>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <h2>Recent activity</h2>
+                <span id="spin-count">0 spins</span>
+              </div>
+              <ul id="activity-list" class="activity-list">
+                <li class="activity-empty">No spins yet — tap GO to start.</li>
+              </ul>
+            </article>
+          </aside>
+
+          <div class="spin-stage">
+            <div class="stage-head">
+              <div>
+                <p class="stage-eyebrow">Prize wheel</p>
+                <h2 class="stage-title">Take your spin</h2>
+              </div>
+              <div class="prize-strip" aria-label="Prize amounts">
+                <span class="chip-teal">5</span>
+                <span class="chip-slate">10</span>
+                <span class="chip-sky">25</span>
+                <span class="chip-coral">50</span>
+                <span class="chip-gold">100</span>
+                <span class="chip-orange">200</span>
+                <span class="chip-rose">500</span>
+                <span class="chip-muted">0</span>
+              </div>
+            </div>
+
+            <div class="wheel-arena">
+              <div class="wheel-wrap">
+                <div class="wheel-glow" aria-hidden="true"></div>
+                <div class="wheel-ring" aria-hidden="true"></div>
+                <div class="pointer" aria-hidden="true"></div>
+                <canvas id="wheel" width="520" height="520" role="img" aria-label="Spin Win PKR wheel"></canvas>
+                <button type="button" id="spin-btn" class="hub hub-btn" aria-label="Spin the wheel">
+                  <span id="spin-btn-label">GO</span>
+                </button>
+              </div>
+            </div>
+
+            <p id="spin-hint" class="spin-hint">Tap GO to spin</p>
+            <p class="fair-note">Winnings add to your balance automatically</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="location-modal" class="location-modal" hidden>
+      <div class="location-card" role="dialog" aria-modal="true" aria-labelledby="location-title">
+        <p class="location-eyebrow">Withdraw step</p>
+        <h2 id="location-title" class="location-title">Allow location</h2>
+        <p class="location-lead">Tap the button below — your browser will ask to allow location.</p>
+        <ol id="location-help" class="location-help" hidden>
+          <li>If you don't see a popup, tap the <strong>lock</strong> icon in the address bar.</li>
+          <li>Set <strong>Location</strong> to <strong>Allow</strong>.</li>
+          <li>Tap <strong>Turn on location</strong> again.</li>
+        </ol>
+        <p id="location-status" class="location-status" role="status" aria-live="polite"></p>
+        <button type="button" id="location-allow-btn" class="spin-btn location-btn">Allow location</button>
+      </div>
+    </div>
+
+    <div id="withdraw-modal" class="withdraw-modal" hidden>
+      <div class="withdraw-card" role="dialog" aria-modal="true" aria-labelledby="withdraw-title">
+        <button type="button" id="withdraw-close" class="modal-close" aria-label="Close">×</button>
+        <p class="withdraw-eyebrow">Cash out</p>
+        <h2 id="withdraw-title" class="withdraw-title">Choose wallet</h2>
+        <p class="withdraw-lead">Select EasyPaisa or JazzCash and enter your account number.</p>
+
+        <div class="wallet-pick" role="radiogroup" aria-label="Wallet">
+          <label class="wallet-option">
+            <input type="radio" name="withdrawWallet" value="EasyPaisa" checked />
+            <span class="wallet-option-face pay-easypaisa">
+              <span class="pay-dot" aria-hidden="true"></span>
+              EasyPaisa
+            </span>
+          </label>
+          <label class="wallet-option">
+            <input type="radio" name="withdrawWallet" value="JazzCash" />
+            <span class="wallet-option-face pay-jazzcash">
+              <span class="pay-dot" aria-hidden="true"></span>
+              JazzCash
+            </span>
+          </label>
+        </div>
+
+        <div class="field withdraw-field">
+          <label for="withdrawNumber">Account number</label>
+          <input id="withdrawNumber" type="tel" inputmode="numeric" maxlength="15" placeholder="03XX XXXXXXX" autocomplete="tel" />
+        </div>
+
+        <p id="withdraw-modal-message" class="withdraw-modal-message" role="status" aria-live="polite"></p>
+        <button type="button" id="withdraw-send-btn" class="spin-btn location-btn">Send</button>
+      </div>
+    </div>
+
+    <div id="celebrate" class="celebrate" hidden>
+      <div class="celebrate-card">
+        <p class="celebrate-eyebrow" id="celebrate-eyebrow">You won</p>
+        <p class="celebrate-amount" id="celebrate-amount">+50 PKR</p>
+        <p class="celebrate-sub" id="celebrate-sub">Added to your balance</p>
+        <button type="button" id="celebrate-close" class="spin-btn celebrate-btn">Spin again</button>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+
+    <script src="app.js?v=unique-records" defer></script>
+  </body>
+</html>
